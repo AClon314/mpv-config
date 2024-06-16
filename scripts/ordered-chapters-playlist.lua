@@ -16,8 +16,6 @@ local playlist_name = ".ordered-chapters.m3u"
 local mp = require 'mp'
 local utils = require 'mp.utils'
 
-local is_windows = package.config:sub(1, 1) == "\\" -- detect path separator, windows uses backslashes
-
 --returns the file extension of the given file
 function get_extension(filename, def)
     return string.lower(filename):match("%.([^%./\\]+)$") or def
@@ -34,7 +32,7 @@ local function main()
     if get_extension(path) ~= "mkv" then return end
     if utils.file_info(path) then return end
 
-    if is_windows then path = path:gsub("\\", "/") end
+    path = path:gsub('\\', '/')
     local directory = path:sub(1, path:find("/[^/]*$"))
     local playlist = directory .. playlist_name
 

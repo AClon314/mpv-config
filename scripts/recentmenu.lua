@@ -4,7 +4,6 @@ local options = require("mp.options")
 local o = {
     enabled = true,
     path = "~~/recent.json",
-    title = 'Recently played',
     length = 10,
     width = 88,
     ignore_same_series = true,
@@ -12,11 +11,10 @@ local o = {
 options.read_options(o, _, function() end)
 
 local path = mp.command_native({ "expand-path", o.path })
-local is_windows = package.config:sub(1, 1) == "\\" -- detect path separator, windows uses backslashes
 
 local menu = {
     type = 'recent_menu',
-    title = o.title,
+    title = 'Recently played',
     items = {},
 }
 
@@ -27,6 +25,9 @@ local dyn_menu = {
 }
 
 local current_item = { nil, nil, nil }
+
+local locale = {}
+function t(text) return locale[text] or text end
 
 function utf8_char_bytes(str, i)
     local char_byte = str:byte(i)
@@ -316,7 +317,6 @@ function on_load()
     local path = mp.get_property("path")
     if not path then return end
     if path:match("bd://") or path:match("dvd://") or path:match("dvb://") or path:match("cdda://") then return end
-    if not is_protocol(path) and is_windows then path = path:gsub("/", "\\") end
     local filename = mp.get_property("filename")
     local dir, filename_without_ext, ext = split_path(filename)
     local title = mp.get_property("media-title") or path
@@ -351,6 +351,12 @@ mp.add_key_binding(nil, "open", open_menu)
 mp.add_key_binding(nil, "last", play_last)
 mp.register_event("file-loaded", on_load)
 mp.register_event("end-file", on_end)
+
+mp.commandv('script-message-to', 'uosc', 'get-locale', mp.get_script_name())
+mp.register_script_message('uosc-locale', function(json)
+    locale = utils.parse_json(json)
+    menu.title = t(menu.title)
+end)
 
 mp.register_script_message('menu-ready', function()
     dyn_menu.ready = true

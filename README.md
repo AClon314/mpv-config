@@ -1,3 +1,12 @@
+## 安装 Install
+```sh
+mkdir -p mpv-config
+cd mpv-config && \
+git clone https://github.com/AClon314/mpv-config.git .
+rm -r ~/.config/mpv
+ln -s $(pwd) ~/.config/mpv
+```
+
 ## MPV config ([English branch](https://github.com/dyphire/mpv-config/tree/eng))
 
 ### 项目介绍

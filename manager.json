@@ -100,28 +100,13 @@
     "dest":"~~/scripts"
   },
   {
-    "git":"https://github.com/CogentRedTester/mpv-user-input",
-    "whitelist":"user%-input%.lua$",
-    "dest":"~~/scripts"
-  },
-  {
-    "git":"https://github.com/CogentRedTester/mpv-user-input",
-    "whitelist":"user%-input%-module%.lua$",
-    "dest":"~~/script-modules"
-  },
-  {
     "git":"https://github.com/CogentRedTester/mpv-scroll-list",
     "whitelist":"scroll%-list%.lua$",
     "dest":"~~/script-modules"
   },
   {
-    "git":"https://github.com/CogentRedTester/mpv-read-file",
-    "whitelist":"read%-file%.lua$",
-    "dest":"~~/script-modules"
-  },
-  {
     "git":"https://github.com/CogentRedTester/mpv-file-browser",
-    "whitelist":"favourites%.lua$|find%.lua$|ftp%-browser%.lua$|home%-label%.lua$|m3u%-browser%.lua$|url%-decode%.lua$|windir%.lua$|winroot%.lua$",
+    "whitelist":"favourites%.lua$|find%.lua$|home%-label%.lua$|url%-decode%.lua$|windir%.lua$|winroot%.lua$",
     "dest":"~~/script-modules/file-browser-addons"
   },
   {
